@@ -1,0 +1,4 @@
+tensorflow==1.13
+tensor2tensor==1.8
+absl-py
+nltk
