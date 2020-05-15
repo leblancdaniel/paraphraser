@@ -1,9 +1,17 @@
 # Unsupervised Data Augmentation
 
 ## Install dependencies and download necessary data
+This product is very sensitive to versioning issues, so it's important to install these versions...
+
+In a virtual environment, like conda, with Python v3.6:
 
 ```shell
 conda create --name {env_name} --python=3.6
+```
+
+Install dependencies one-by-one:
+
+```shell
 pip install tensorflow==1.13
 pip install tensor2tensor==1.8
 pip install absl-py
@@ -34,7 +42,7 @@ bash download.sh
 bash run.sh
 ```
 The first run will throw an error that it can't find *vocab.enfr.large.32768* 
-under *checkpoints* because the file is created under another name.  
+under *checkpoints* because the file is created by T2T under another name.  
 Simply rename the created *vocab.* file to the expected filename and run again.
 
 The output is quite verbose because of versioning issues of TF and T2T.
@@ -46,10 +54,8 @@ diversity and quality of the paraphrases. Increasing sampling_temp will lead to
 increased diversity but worse quality. Surprisingly, diversity is more important
 than quality for many tasks we tried.
 
-We suggest trying to set sampling_temp to 0.7, 0.8 and 0.9. If your task is very
-robust to noise, sampling_temp=0.9 or 0.8 should lead to improved performance.
-If your task is not robust to noise, setting sampling temp to 0.7 or 0.6 should
-be better.
+You can also specify the number of iterations you would like to run, i.e. the 
+number of paraphrases you would like to create.
 
 If you want to do back translation to a large file, you can change the replicas
 and worker_id arguments in run.sh. For example, when replicas=3, we divide the
@@ -61,6 +67,11 @@ the worker_id.
 UDA works out-of-box and does not require extensive hyperparameter tuning, but
 to really push the performance, here are suggestions about hyperparamters:
 
+*   In trying to find the best balance of new paraphrases, keep in mind the 
+    tradeoff between *sampling_temp* and *iterations*.  The more iterations 
+    you run, the higher % of duplicate paraphrases are removed.  Moreover, 
+    the lower the sampling temp, the higher % of duplicate paraphrases are
+    likely to occur.
 *   It works well to set the weight on unsupervised objective *'unsup_coeff'*
     to 1.
 *   Use a lower learning rate than pure supervised learning because there are
