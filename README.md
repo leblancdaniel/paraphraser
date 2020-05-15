@@ -1,7 +1,7 @@
 # Unsupervised Data Augmentation
 
 ## Install dependencies and download necessary data
-This product is very sensitive to versioning issues, so it's important to install these versions...
+This program is very sensitive to versioning issues, so it's important to install these versions...
 
 In a virtual environment, like conda, with Python v3.6:
 
@@ -32,56 +32,45 @@ python -c "import nltk; nltk.download('punkt')"
 
 ## Run back translation data augmentation for your dataset
 
-The following command translates the provided example file. It automatically
+The following command augments the provided FAQ.csv file. It automatically
 splits paragraphs into sentences, translates English sentences to French and
-then translates them back into English. Finally, it composes the paraphrased
-sentences into paragraphs. Go to the *back_translate* directory and run:
+then translates them back into English. Then, it composes the paraphrased
+sentences into paragraphs corresponding to the 'Response/Answer' columns. 
+Finally, it removes any duplicated paraphrases and appends them to a final 
+.csv file. Go to the *back_translate* directory and run:
 
 ```shell
 bash download.sh
 bash run.sh
 ```
-The first run will throw an error that it can't find *vocab.enfr.large.32768* 
-under *checkpoints* because the file is created by T2T under another name.  
-Simply rename the created *vocab.* file to the expected filename and run again.
+The first run will throw an error that it can't find *vocab.enfr.large.32768* under 
+*checkpoints* because the file is created by T2T under another name.  Simply rename 
+the created *vocab.* file to the expected filename and run again.
 
 The output is quite verbose because of versioning issues of TF and T2T.
+
+You can run this program on the original document multiple times, to further augment
+the data.
 
 ### Guidelines for hyperparameters:
 
 There is a variable *sampling_temp* in the bash file. It is used to control the
 diversity and quality of the paraphrases. Increasing sampling_temp will lead to
 increased diversity but worse quality. Surprisingly, diversity is more important
-than quality for many tasks we tried.
+than quality for many tasks.
 
 You can also specify the number of iterations you would like to run, i.e. the 
-number of paraphrases you would like to create.
+number of paraphrases you would like to create for each row on a single run.
 
 If you want to do back translation to a large file, you can change the replicas
 and worker_id arguments in run.sh. For example, when replicas=3, we divide the
 data into three parts, and each run.sh will only process one part according to
 the worker_id.
 
-## General guidelines for setting hyperparameters:
-
-UDA works out-of-box and does not require extensive hyperparameter tuning, but
-to really push the performance, here are suggestions about hyperparamters:
-
-*   In trying to find the best balance of new paraphrases, keep in mind the 
-    tradeoff between *sampling_temp* and *iterations*.  The more iterations 
-    you run, the higher % of duplicate paraphrases are removed.  Moreover, 
-    the lower the sampling temp, the higher % of duplicate paraphrases are
-    likely to occur.
-*   It works well to set the weight on unsupervised objective *'unsup_coeff'*
-    to 1.
-*   Use a lower learning rate than pure supervised learning because there are
-    two loss terms computed on labeled data and unlabeled data respecitively.
-*   If your have an extremely small amount of data, try to tweak
-    'uda_softmax_temp' and 'uda_confidence_thresh' a bit. For more details about
-    these two hyperparameters, search the "Confidence-based masking" and
-    "Softmax temperature control" in the paper.
-*   Effective augmentation for supervised learning usually works well for UDA.
-
+In trying to find the best balance of new paraphrases, keep in mind the tradeoff 
+between *sampling_temp* and *iterations*.  The more iterations you run, the higher 
+% of duplicate paraphrases are removed.  The lower the diversity, the higher % of 
+duplicate paraphrases are likely to be created and thus removed.
 
 ## Acknowledgement
 
@@ -102,7 +91,3 @@ Please cite this paper if you use UDA.
   year={2019}
 }
 ```
-
-## Disclaimer
-
-This is not an officially supported Google product.
