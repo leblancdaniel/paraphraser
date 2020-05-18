@@ -16,6 +16,7 @@ pip install tensorflow==1.13.2
 pip install tensor2tensor==1.8
 pip install absl-py
 pip install nltk
+pip install pandas
 ```
 
 Or simply:
