@@ -45,10 +45,12 @@ Go to the *back_translate* directory and run:
 bash download.sh
 ```
 
+Finally, under the *checkpoints* folder, rename *vocab.translate_enfr_wmt32k.32768.subwords* 
+to *vocab.enfr.large.32768*
+
 ## Run back translation data augmentation for your dataset
 
-Next, under the *checkpoints* folder, rename *vocab.translate_enfr_wmt32k.32768.subwords* 
-to *vocab.enfr.large.32768*, and run the following command:
+ Once you have done all of the steps above, you can repeatedly run the following command:
 
 ```shell
 bash run.sh
