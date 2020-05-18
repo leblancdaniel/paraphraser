@@ -37,15 +37,24 @@ splits paragraphs into sentences, translates English sentences to French and
 then translates them back into English. Then, it composes the paraphrased
 sentences into paragraphs corresponding to the 'Response/Answer' columns. 
 Finally, it removes any duplicated paraphrases and appends them to a final 
-.csv file. Go to the *back_translate* directory and run:
+.csv file. 
+
+Go to the *back_translate* directory and run:
 
 ```shell
 bash download.sh
+```
+
+Running *run.sh* will throw an error the first time that it can't find the file
+*vocab.enfr.large.32768* under *checkpoints* because the file is created by T2T 
+under another name.  
+
+Simply rename *vocab.translate_enfr_wmt32k.32768.subwords* to the expected filename 
+and run the following command:
+
+```shell
 bash run.sh
 ```
-The first run will throw an error that it can't find *vocab.enfr.large.32768* under 
-*checkpoints* because the file is created by T2T under another name.  Simply rename 
-the created *vocab.* file to the expected filename and run again.
 
 The output is quite verbose because of versioning issues of TF and T2T.
 
