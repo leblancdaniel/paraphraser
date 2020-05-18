@@ -6,13 +6,13 @@ This program is very sensitive to versioning issues, so it's important to instal
 In a virtual environment, like conda, with Python v3.6:
 
 ```shell
-conda create --name {env_name} --python=3.6
+conda create --name {env_name} python=3.6
 ```
 
 Install dependencies one-by-one:
 
 ```shell
-pip install tensorflow==1.13
+pip install tensorflow==1.13.2
 pip install tensor2tensor==1.8
 pip install absl-py
 pip install nltk
