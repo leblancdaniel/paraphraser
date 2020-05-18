@@ -1,15 +1,23 @@
 # Unsupervised Data Augmentation
 
-## Install dependencies and download necessary data
-This program is very sensitive to versioning issues, so it's important to install these versions...
+The program augments the provided FAQ.csv file in 5 main steps:
+1) Split paragraphs into sentences; 
+2) Translate English sentences to French; *(languages can be changed)*
+3) Translate them back into English; 
+4) Compose the paraphrased sentences back into paragraphs, and;  
+5) Remove any duplicated paraphrases and append them to a new .csv file 
 
-In a virtual environment, like conda, with Python v3.6:
+## Install dependencies and download necessary data
+This program is sensitive to versioning issues, so it's important to install the specified
+library versions to run.  If you have more compatible versions, please feel free to update.
+
+In a virtual/conda environment with Python v3.6:
 
 ```shell
 conda create --name {env_name} python=3.6
 ```
 
-Install dependencies one-by-one:
+Install dependencies either one-by-one:
 
 ```shell
 pip install tensorflow==1.13.2
@@ -31,20 +39,13 @@ Then, download 'punkt' from the 'nltk' library:
 python -c "import nltk; nltk.download('punkt')"
 ```
 
-## Run back translation data augmentation for your dataset
-
-The following command augments the provided FAQ.csv file. It automatically
-splits paragraphs into sentences, translates English sentences to French and
-then translates them back into English. Then, it composes the paraphrased
-sentences into paragraphs corresponding to the 'Response/Answer' columns. 
-Finally, it removes any duplicated paraphrases and appends them to a final 
-.csv file. 
-
 Go to the *back_translate* directory and run:
 
 ```shell
 bash download.sh
 ```
+
+## Run back translation data augmentation for your dataset
 
 Next, under the *checkpoints* folder, rename *vocab.translate_enfr_wmt32k.32768.subwords* 
 to *vocab.enfr.large.32768*, and run the following command:
