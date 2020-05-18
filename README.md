@@ -46,12 +46,8 @@ Go to the *back_translate* directory and run:
 bash download.sh
 ```
 
-Running *run.sh* will throw an error the first time that it can't find the file
-*vocab.enfr.large.32768* under *checkpoints* because the file is created by T2T 
-under another name.  
-
-Simply rename *vocab.translate_enfr_wmt32k.32768.subwords* to the expected filename 
-and run the following command:
+Next, under the *checkpoints* folder, rename *vocab.translate_enfr_wmt32k.32768.subwords* 
+to *vocab.enfr.large.32768*, and run the following command:
 
 ```shell
 bash run.sh
