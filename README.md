@@ -78,22 +78,7 @@ between *sampling_temp* and *iterations*.  The more iterations you run, the high
 % of duplicate paraphrases are removed.  The lower the diversity, the higher % of 
 duplicate paraphrases are likely to be created and thus removed.
 
-## Acknowledgement
-
-A large portion of the code is taken from
-[BERT](https://github.com/google-research/bert) and
-[RandAugment](https://github.com/tensorflow/models/tree/master/research/autoaugment).
-Thanks!
 
 ## Citation
 
-Please cite this paper if you use UDA.
-
-```
-@article{xie2019unsupervised,
-  title={Unsupervised Data Augmentation for Consistency Training},
-  author={Xie, Qizhe and Dai, Zihang and Hovy, Eduard and Luong, Minh-Thang and Le, Quoc V},
-  journal={arXiv preprint arXiv:1904.12848},
-  year={2019}
-}
-```
+You can find the original paper on UDA here: https://arxiv.org/abs/1904.12848
