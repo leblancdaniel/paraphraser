@@ -54,7 +54,10 @@ to *vocab.enfr.large.32768*, and run the following command:
 bash run.sh
 ```
 
-The output is quite verbose because of versioning issues of TF and T2T.
+The shell output is quite verbose because of versioning issues of TF and T2T.
+
+You will find the new, augmented FAQ dataset under the *back_trans_data/paraphrase* 
+directory as *paraphrased_{input_file}.csv*
 
 You can run this program on the original document multiple times, to further augment
 the data.
